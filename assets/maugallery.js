@@ -57,11 +57,11 @@
       }
     });
 
-    $(".gallery").on("click", ".nav-link", $.fn.mauGallery.methods.filterByTag);
-    $(".gallery").on("click", ".mg-prev", () =>
+    $(".gallery-container").on("click", ".nav-link", $.fn.mauGallery.methods.filterByTag);
+    $(".gallery-container").on("click", ".mg-prev", () =>
       $.fn.mauGallery.methods.prevImage(options.lightboxId)
     );
-    $(".gallery").on("click", ".mg-next", () =>
+    $(".gallery-container").on("click", ".mg-next", () =>
       $.fn.mauGallery.methods.nextImage(options.lightboxId)
     );
   };
