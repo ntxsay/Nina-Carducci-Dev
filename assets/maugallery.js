@@ -57,7 +57,11 @@
       }
     });
 
+    /**
+     * Evenement se produisant lorsque l'utilisateur clique sur un bouton de filtre et lance la fonction filterByTag 
+     */
     $(".gallery-container").on("click", ".nav-link", $.fn.mauGallery.methods.filterByTag);
+    
     $(".gallery-container").on("click", ".mg-prev", () =>
       $.fn.mauGallery.methods.prevImage(options.lightboxId)
     );
@@ -235,12 +239,21 @@
         console.error(`Unknown tags position: ${position}`);
       }
     },
+    /**
+     * Filtre les tags
+     */
     filterByTag() {
+      
+      //Si le filtre cliqué ("span.nav-link") contient la classe "active-tag", on sort de la fonction
       if ($(this).hasClass("active-tag")) {
         return;
       }
+      
+      //Retire les classes "active" et "active-tag" des éléments qui ont la classe "active-tag"
       $(".active-tag").removeClass("active active-tag");
-      $(this).addClass("active-tag");
+      
+      //Ajoute la classe "active-tag" au filtre cliqué ("span.nav-link")
+      $(this).addClass("active active-tag");
 
       var tag = $(this).data("images-toggle");
 
