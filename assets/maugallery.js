@@ -1,27 +1,27 @@
 (function($) {
   $.fn.mauGallery = function(options) {
-    var options = $.extend($.fn.mauGallery.defaults, options);
-    var tagsCollection = [];
+    let _options = $.extend($.fn.mauGallery.defaults, options);
+    let tagsCollection = [];
     return this.each(function() {
       $.fn.mauGallery.methods.createRowWrapper($(this));
-      if (options.lightBox) {
+      if (_options.lightBox) {
         $.fn.mauGallery.methods.createLightBox(
           $(this),
-          options.lightboxId,
-          options.navigation
+          _options.lightboxId,
+          _options.navigation
         );
       }
-      $.fn.mauGallery.listeners(options);
+      $.fn.mauGallery.listeners(_options);
 
       $(this)
         .children(".gallery-item")
         .each(function(index) {
           $.fn.mauGallery.methods.responsiveImageItem($(this));
           $.fn.mauGallery.methods.moveItemInRowWrapper($(this));
-          $.fn.mauGallery.methods.wrapItemInColumn($(this), options.columns);
-          var theTag = $(this).data("gallery-tag");
+          $.fn.mauGallery.methods.wrapItemInColumn($(this), _options.columns);
+          let theTag = $(this).data("gallery-tag");
           if (
-            options.showTags &&
+            _options.showTags &&
             theTag !== undefined &&
             tagsCollection.indexOf(theTag) === -1
           ) {
@@ -29,10 +29,10 @@
           }
         });
 
-      if (options.showTags) {
+      if (_options.showTags) {
         $.fn.mauGallery.methods.showItemTags(
           $(this),
-          options.tagsPosition,
+          _options.tagsPosition,
           tagsCollection
         );
       }
@@ -86,7 +86,7 @@
           `<div class='item-column mb-4 col-${Math.ceil(12 / columns)}'></div>`
         );
       } else if (columns.constructor === Object) {
-        var columnClasses = "";
+        let columnClasses = "";
         if (columns.xs) {
           columnClasses += ` col-${Math.ceil(12 / columns.xs)}`;
         }
@@ -223,13 +223,13 @@
             </div>`);
     },
     showItemTags(gallery, position, tags) {
-      var tagItems =
+      let tagItems =
         '<li class="nav-item"><span class="nav-link active active-tag"  data-images-toggle="all">All</span></li>';
       $.each(tags, function(index, value) {
         tagItems += `<li class="nav-item active">
                 <span class="nav-link"  data-images-toggle="${value}">${value}</span></li>`;
       });
-      var tagsRow = `<ul class="my-4 tags-bar nav nav-pills">${tagItems}</ul>`;
+      let tagsRow = `<ul class="my-4 tags-bar nav nav-pills">${tagItems}</ul>`;
 
       if (position === "bottom") {
         gallery.append(tagsRow);
@@ -255,7 +255,7 @@
       //Ajoute la classe "active-tag" au filtre cliqué ("span.nav-link")
       $(this).addClass("active active-tag");
 
-      var tag = $(this).data("images-toggle");
+      let tag = $(this).data("images-toggle");
 
       $(".gallery-item").each(function() {
         $(this)
